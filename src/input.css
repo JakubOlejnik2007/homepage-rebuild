@@ -7,6 +7,11 @@
     src: url("./fonts/sfpro/SFPRODISPLAYREGULAR.OTF");
 }
 
+@font-face {
+    font-family: "SFProMedium";
+    src: url("./fonts/sfpro/SFPRODISPLAYMEDIUM.OTF");
+}
+
 body {
     font-family: SFProRegular;
 }
