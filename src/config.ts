@@ -8,4 +8,4 @@ const config = {
     port: parseInt(process.env.PORT as string)
 }
 
-console.log(config);
+export default config;
