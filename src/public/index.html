@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html lang="pl" class="">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Strona domowa - Jakub Olejnik. O mnie, o moich projektach i pasjach.">
     <title>Jakub Olejnik</title>
     <link rel="stylesheet" href="main.css">
+
+    <meta property="og:title" content="Jakub">
+    <meta property="og:description" content="Strona domowa - Jakub Olejnik. O mnie, o moich projektach i pasjach.">
+    <meta property="og:image" content="https://tenco.waw.pl/img.png">
+    <meta property="og:url" content="https://tenco.waw.pl">
+    <meta property="og:type" content="website">
+
+    <meta property="og:site_name" content="Jakub Olejnik">
+    <meta property="og:locale" content="pl_PL">
 </head>
 
 <body class="bg-my_black">
     <header
         class="m-2 px-2 text-center text-xs md:text-xl md:m-5 shadow-[0_2px_10px_0px_rgba(0,0,0,0.5)] flex justify-between items-center text-nav_font rounded-2xl">
+        <h1 class="overflow-hidden invisible text-[0px]">Jakub Olejnik - strona o mnie
+        </h1>
         <div class="flex self-stretch">
             <nav class="flex gap-8 m-3 self-stretch items-center">
                 <a href="http://">O mnie</a>
@@ -38,7 +50,7 @@
     </header>
     <main class="mt-28">
         <section
-            class="relative bg-[url('./img/about_me_bg.jpg')] border-y-2 border-border bg-no-repeat bg-center bg-cover">
+            class="relative bg-[url('./img/about_me_bg.jpg')] border-y-2 border-border bg-no-repeat bg-center bg-cover z-10">
             <div class="absolute inset-0 bg-my_brown/95 z-0"></div>
             <div class="relative z-10">
                 <h2
@@ -66,32 +78,36 @@
                 </div>
             </div>
         </section>
-        <section class="border-b-2 border-border">
-            <div class="relative z-10">
+        <section class="relative border-b-2 border-border ">
+            <div class="relative z-20">
                 <h2
                     class="absolute text-3xl font-[SFProMedium] text-header bg-my_black w-fit p-3 border-2 border-border rounded-lg -top-8 left-1/2 transform -translate-x-1/2 md:left-40 text-nowrap">
                     Moja twórczość
                 </h2>
             </div>
+            <div
+                class="absolute w-full h-full bg-gradient-to-b from-my_orange/15 via-my_orange/0 via-my_orange/0 to-my_black opacity-0 hover:opacity-100 duration-1000 hover:duration-300 ease-in z-1">
+            </div>
             <div class="flex flex-col md:flex-row gap-10 justify-center items-center m-16 mt-0 pt-16">
-                <img src="img/olejnik1.png" alt="Jakub Olejnik" class="w-40 rounded-md">
-                <p class="text-text_on_gray text-justify p-2 md:p-5 mt-5 text-lg">
+                <img src="img/olejnik1.png" alt="Jakub Olejnik" class="w-40 rounded-md z-20">
+                <p class="text-text_on_gray text-justify p-2 md:p-5 mt-5 text-lg z-20">
 
                 </p>
             </div>
         </section>
-        <section class="border-b-2 border-border bg-gradient-to-b from-my_orange/10 via-my_orange/0 via-my_orange/0 to-my_black
-
-        ">
-            <div class="relative z-10">
+        <section class="relative border-b-2 border-border">
+            <div class="relative z-20">
                 <h2
                     class="absolute text-3xl font-[SFProMedium] text-header bg-my_black w-fit p-3 border-2 border-border rounded-lg -top-8 left-1/2 transform -translate-x-1/2 md:left-40 text-nowrap">
                     Nowostki
                 </h2>
             </div>
+            <div
+                class="absolute w-full h-full bg-gradient-to-b from-my_orange/15 via-my_orange/0 via-my_orange/0 to-my_black opacity-0 hover:opacity-100 duration-1000 hover:duration-300 ease-in z-1">
+            </div>
             <div class="flex flex-col md:flex-row gap-10 justify-center items-center m-16 mt-0 pt-16">
-                <img src="img/olejnik1.png" alt="Jakub Olejnik" class="w-40 rounded-md">
-                <p class="text-text_on_gray text-justify p-2 md:p-5 mt-5 text-lg">Lorem Lorem ipsum ipsum
+                <img src="img/olejnik1.png" alt="Jakub Olejnik" class="w-40 rounded-md z-20">
+                <p class="text-text_on_gray text-justify p-2 md:p-5 mt-5 text-lg z-20">Lorem Lorem ipsum ipsum
                     dolor dolor
                     sit sit
                     amet

@@ -13,7 +13,7 @@ module.exports = {
       "my_brown": "#2b190a",
       "border": "#3b3b3a",
       "header": "#fdfdfd",
-    }
+    },
   },
   plugins: [],
 }
