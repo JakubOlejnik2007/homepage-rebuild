@@ -37,6 +37,18 @@ db.serialize(() => {
 
 db.close();
 
+app.get("/api/getProjects", (req, res) => {
+    const db = new sqlite3.Database('homepagedata.db');
+    db.all("SELECT * FROM Projects;", (err: any, rows: any) => {
+        if (err) {
+            res.status(500).send({ error: err.message });
+            return;
+        }
+        res.send(rows);
+    });
+    db.close();
+})
+
 app.listen(config.port, () =>
     console.log(`[⚡] Server is listening on port: ${config.port}!`)
 )

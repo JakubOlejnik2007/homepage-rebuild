@@ -16,6 +16,9 @@
 
     <meta property="og:site_name" content="Jakub Olejnik">
     <meta property="og:locale" content="pl_PL">
+
+    <script src="/node_modules/axios/dist/axios.min.js" defer></script>
+    <script src="./fetchProjects.js" defer></script>
 </head>
 
 <body class="bg-my_black">
@@ -87,7 +90,7 @@
             </div>
             <div class="flex flex-col lg:flex-col-reverse gap-10 justify-center items-center m-16 mt-0 pt-16">
                 <div class="text-nowrap">🟡🟡🟡🟡</div>
-                <div class="flex justify-center items-stretch gap-6 flex-wrap md:text">
+                <div id="projects-js" class="flex justify-center items-stretch gap-6 flex-wrap md:text">
                     <article
                         class="shadow-[0_0px_10px_0px_rgba(0,0,0,0.5)] hover:shadow-[0_0_15px_2px_rgba(255,152,62,0.75)] hover:bg-[rgba(255,152,62,0.2)] border-2 border-[rgba(0,0,0,0)] hover:border-my_orange hover:scale-105 duration-300 ease-out hover:ease-in w-64 text-wrap p-6 rounded-lg">
                         <img src="https://tenco.waw.pl/img.png" alt="temp" class="m-auto scale-90 rounded-lg h-[178px]">
@@ -171,6 +174,7 @@
             <p class="text-center text-my_orange">
                 Projekt UI: Mateusz Stoch
             </p>
+            <br>
         </footer>
     </main>
 </body>
