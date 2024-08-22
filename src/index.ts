@@ -30,7 +30,12 @@ app.get("/api/getProjects", (req, res) => {
             res.status(500).send({ error: err.message });
             return;
         }
-        res.send(rows);
+        const page = Number(req.query.page)
+        const rowsToSend = []
+        for (let i = page * 4; i < rows.length && i < (page + 1) * 4; i++) {
+            rowsToSend.push(rows[i]);
+        }
+        res.send(rowsToSend);
     });
     db.close();
 })
@@ -38,6 +43,19 @@ app.get("/api/getProjects", (req, res) => {
 app.get("/projekty/:projectTitle", (req, res) => {
     console.log(req.params.projectTitle)
     res.sendFile(`${staticPath}/projekt.html`)
+})
+
+app.get("/api/getProjectsCount", (req, res) => {
+    const db = new sqlite3.Database('homepagedata.db');
+    db.all("SELECT COUNT(*) as count FROM Projects;", (err: any, row: any) => {
+        if (err) {
+            res.status(500).send({ error: err.message });
+            return;
+        }
+        res.send(row[0]);
+    });
+    db.close();
+
 })
 
 app.listen(config.port, () =>
