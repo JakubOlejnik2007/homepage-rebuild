@@ -8,9 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "public")));
+const staticPath = path.join(__dirname, "public");
 
-console.log(path.join(__dirname, "public"))
+app.use(express.static(staticPath));
 
 app.get("/get-posts", (req, res) => {
     res.send([
@@ -47,6 +47,11 @@ app.get("/api/getProjects", (req, res) => {
         res.send(rows);
     });
     db.close();
+})
+
+app.get("/projekty/:projectTitle", (req, res) => {
+    console.log(req.params.projectTitle)
+    res.sendFile(`${staticPath}/projekt.html`)
 })
 
 app.listen(config.port, () =>
