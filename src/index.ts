@@ -22,20 +22,6 @@ app.get("/get-posts", (req, res) => {
 })
 
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('homepagedata.db');
-
-db.serialize(() => {
-    //db.run("DROP TABLE Projects");
-    //db.run("CREATE TABLE Projects (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, teaser TEXT NOT NULL, content TEXT NOT NULL, icon TEXT NOT NULL, date INTEGER NOT NULL);");
-
-    //db.run(`INSERT INTO Projects VALUES (0, "Testowy wpis", "Lorem ipsum sit dolor amit", "<h2> test </h2> <br><br> test2", "https://tenco.waw.pl/img/978454.jpg", 1724191576127);`);
-
-    db.each("SELECT * FROM Projects;", (err: any, row: any) => {
-        console.log(`${row.id}: ${row.title} ${row.content}`);
-    });
-});
-
-db.close();
 
 app.get("/api/getProjects", (req, res) => {
     const db = new sqlite3.Database('homepagedata.db');
