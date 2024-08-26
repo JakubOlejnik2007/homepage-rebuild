@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Aktualności - Jakub Olejnik</title>
+        <link>https://tenco.waw.pl</link>
+        <description>Kanał RSS zawierający aktualności z strony tenco.waw.pl</description>
+        <language>pl-PL</language>
+        <copyright>2024 tenco.waw.pl</copyright>
+        <managingEditor>jacobole2000@gmail.com</managingEditor>
+        <webMaster>jacobole2000@gmail.com</webMaster>
+        <category>Technology</category>
+
+        <image>
+            <url>https://tenco.waw.pl/img/olejnik2.png</url>
+            <title>Channel's logo</title>
+            <link>https://tenco.waw.pl</link>
+        </image>
+
+        <item>
+            <title>Testowy wpis na kanale RSS</title>
+            <link>https://www.tenco.waw.pl?num=1</link>
+            <description>Opis Aktualności 1</description>
+            <pubDate>Sat, 24 Aug 2024 14:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>Drugi wpis na kanale RSS</title>
+            <link>https://www.tenco.waw.pl?num=2</link>
+            <description>Opis Aktualności 2</description>
+            <pubDate>Sat, 26 Aug 2024 14:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>tr wpis na kanale RSS</title>
+            <link>https://www.tenco.waw.pl?num=3</link>
+            <description>Opis Aktualności 3</description>
+            <pubDate>Sat, 26 Aug 2024 16:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>czw wpis na kanale RSS</title>
+            <link>https://www.tenco.waw.pl?num=4</link>
+            <description>Opis Aktualności 4</description>
+            <pubDate>Sat, 26 Aug 2024 16:01:00 +0000</pubDate>
+        </item>
+    </channel>
+</rss>
