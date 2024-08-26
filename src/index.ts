@@ -45,6 +45,11 @@ app.get("/projekty/:projectTitle", (req, res) => {
     res.sendFile(`${staticPath}/projekt.html`)
 })
 
+app.get("/cms", (req, res) => {
+    res.sendFile(`${staticPath}/cms.html`)
+})
+
+
 app.get("/api/getProjectsCount", (req, res) => {
     const db = new sqlite3.Database('homepagedata.db');
     db.all("SELECT COUNT(*) as count FROM Projects;", (err: any, row: any) => {
