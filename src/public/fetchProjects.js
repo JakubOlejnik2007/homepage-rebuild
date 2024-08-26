@@ -1,7 +1,7 @@
 
 const projectsDiv = document.querySelector('#projects-js');
 
-const generateProjectCard = (project) => {
+const generateProjectCard = (project, hide = false) => {
     const date = new Date(project.date);
 
     const parent = document.createElement("article");
@@ -20,7 +20,8 @@ const generateProjectCard = (project) => {
         "text-wrap",
         "p-6",
         "rounded-lg",
-        "flex", "flex-col", "justify-between"
+        "flex", "flex-col", "justify-between",
+        hide ? "opacity-0" : "opacity-100"
     );
 
     const headerSection = document.createElement("div");
@@ -72,7 +73,12 @@ const fetchAndDisplayProjects = async (page = 0) => {
         projectsDiv.innerHTML = "";
 
         response.data.forEach(project => generateProjectCard(project))
-
+        const responseLength = response.data.length;
+        if (responseLength < 4) {
+            for (let i = 0; i < 4 - responseLength; i++) {
+                generateProjectCard({}, true);
+            }
+        }
 
 
     } catch (e) {
