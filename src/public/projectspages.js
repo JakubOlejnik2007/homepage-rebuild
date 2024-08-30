@@ -31,8 +31,10 @@ const generatePages = (pagesCount) => {
 
 const getProjectsCount = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/api/getProjectsCount");
-        return response.data.count;
+        const response = await fetch("http://localhost:5000/api/getProjectsCount");
+        const data = await response.json();
+        console.log(data)
+        return data.count;
     } catch (e) {
         console.error("Failed to fetch projects", e);
         return;

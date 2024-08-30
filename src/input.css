@@ -15,3 +15,11 @@
 body {
     font-family: SFProRegular;
 }
+
+a::before {
+    content: " ";
+}
+
+a::after {
+    content: " ";
+}

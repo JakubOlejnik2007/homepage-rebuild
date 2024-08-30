@@ -67,25 +67,24 @@ const generateProjectCard = (project, hide = false) => {
 
 const fetchAndDisplayProjects = async (page = 0) => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/getProjects?page=${page}`);
-        console.log(response.data);
+        const response = await fetch(`http://localhost:5000/api/getProjects?page=${page}`);
+        const data = await response.json();
 
         projectsDiv.innerHTML = "";
 
-        response.data.forEach(project => generateProjectCard(project))
-        const responseLength = response.data.length;
+        data.forEach(project => generateProjectCard(project));
+
+        const responseLength = data.length;
         if (responseLength < 4) {
             for (let i = 0; i < 4 - responseLength; i++) {
                 generateProjectCard({}, true);
             }
         }
 
-
     } catch (e) {
         console.error("Failed to fetch projects", e);
         return;
     }
-
 }
 
 fetchAndDisplayProjects()
