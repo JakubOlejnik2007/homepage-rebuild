@@ -56,7 +56,7 @@ const generateProjectCard = (project, hide = false) => {
     readMoreP.classList.add("text-right", "text-my_orange");
     const readMoreAnchor = document.createElement("a");
     readMoreAnchor.textContent = "Czytaj więcej...";
-    readMoreAnchor.href = `http://localhost:2137/projekty/${project.urlTitle}`;
+    readMoreAnchor.href = `http://localhost:5000/projekty/${project.urlTitle}`;
     readMoreP.appendChild(readMoreAnchor);
     footerSection.appendChild(readMoreP);
 
@@ -67,7 +67,7 @@ const generateProjectCard = (project, hide = false) => {
 
 const fetchAndDisplayProjects = async (page = 0) => {
     try {
-        const response = await axios.get(`http://localhost:2137/api/getProjects?page=${page}`);
+        const response = await axios.get(`http://localhost:5000/api/getProjects?page=${page}`);
         console.log(response.data);
 
         projectsDiv.innerHTML = "";

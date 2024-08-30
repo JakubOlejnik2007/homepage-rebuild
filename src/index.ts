@@ -40,9 +40,9 @@ app.get("/api/getProjects", (req, res) => {
     db.close();
 })
 
-app.get("/projekty/:projectTitle", (req, res) => {
-    console.log(req.params.projectTitle)
-    res.sendFile(`${staticPath}/projekt.html`)
+app.get("/projekty/:projectTitle/", async (req, res) => {
+    if (req.query.data === undefined) res.sendFile(`${staticPath}/projekt.html`)
+    else res.send(await getProject(req.params.projectTitle))
 })
 
 app.get("/cms", (req, res) => {
@@ -66,3 +66,21 @@ app.get("/api/getProjectsCount", (req, res) => {
 app.listen(config.port, () =>
     console.log(`[⚡] Server is listening on port: ${config.port}!`)
 )
+
+const getProject = async (title: string) => {
+    const db = new sqlite3.Database('homepagedata.db');
+
+    const result = await new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM Projects WHERE urlTitle="${title}";`, (err: any, rows: any) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows[0]);
+            }
+        });
+    });
+
+    db.close();
+    console.log(result);
+    return result;
+};
