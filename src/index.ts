@@ -41,8 +41,58 @@ app.get("/api/getProjects", (req, res) => {
 })
 
 app.get("/projekty/:projectTitle/", async (req, res) => {
-    if (req.query.data === undefined) res.sendFile(`${staticPath}/projekt.html`)
-    else res.send(await getProject(req.params.projectTitle))
+    const project = await getProject(req.params.projectTitle) as {
+        id: number;
+        icon: string;
+        date: number;
+        title: string;
+        content: any;
+        teaser: string;
+        urlTitle: string;
+    };
+    project.content = JSON.parse(project.content)
+    res.send(`
+        <!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="${project.teaser}">
+    <title>${project.title}</title>
+    <link rel="stylesheet" href="/main.css">
+
+    <meta property="og:title" content="${project.title}">
+    <meta property="og:description" content="${project.teaser}">
+    <meta property="og:image" content="${project.icon}">
+    <meta property="og:url" content='https://tenco.waw.p/projekty/${project.urlTitle}'>
+    <meta property="og:type" content="website">
+
+    <meta property="og:site_name" content="Jakub Olejnik">
+    <meta property="og:locale" content="pl_PL">
+    <script>
+        
+    </script>
+
+</head>
+
+<body>
+
+</body>
+<script src="/generator.js"></script>
+<script>
+const rawData = JSON.parse('${JSON.stringify(project)}');
+    const insertCode = async () => {
+        console.log(rawData.content)
+        const generatedHTML = generateHTML(rawData.content);
+        document.querySelector('body').appendChild(generatedHTML);
+    }
+    insertCode();
+
+</script>
+
+</html>
+        `)
 })
 
 app.get("/cms", (req, res) => {

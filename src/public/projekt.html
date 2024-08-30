@@ -1,45 +1,67 @@
-<!DOCTYPE html>
 <html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Strona domowa - Jakub Olejnik. O mnie, o moich projektach i pasjach.">
-    <title>Jakub Olejnik</title>
+    <meta name="description"
+        content="ESZUT, czyli Elektroniczny System Zgłaszania Usterek Technicznych. Projekt obejmuje system, który umożliwia zgłaszanie usterek i zarządzanie nimi.">
+    <title>ESZUT</title>
     <link rel="stylesheet" href="/main.css">
 
-    <meta property="og:title" content="Jakub">
-    <meta property="og:description" content="Strona domowa - Jakub Olejnik. O mnie, o moich projektach i pasjach.">
-    <meta property="og:image" content="https://tenco.waw.pl/img.png">
-    <meta property="og:url" content="https://tenco.waw.pl">
+    <meta property="og:title" content="ESZUT">
+    <meta property="og:description"
+        content="ESZUT, czyli Elektroniczny System Zgłaszania Usterek Technicznych. Projekt obejmuje system, który umożliwia zgłaszanie usterek i zarządzanie nimi.">
+    <meta property="og:image"
+        content="https://raw.githubusercontent.com/JakubOlejnik2007/eszut-client/main/public/logo512.png">
+    <meta property="og:url" content="https://tenco.waw.p/projekty/eszut">
     <meta property="og:type" content="website">
 
     <meta property="og:site_name" content="Jakub Olejnik">
     <meta property="og:locale" content="pl_PL">
     <script>
-        const fetchProject = async () => {
-            const response = await fetch(`${window.location}?data`);
-            const data = await response.json();
-            return data;
-        }
-        const projectData = fetchProject();
+
     </script>
+    <link id="chromealerabat-link" rel="stylesheet" type="text/css"
+        href="chrome-extension://dacdinoicboceafielngnmjjplncljhj/content.css">
 
 </head>
 
-<body>
+<body class="vsc-initialized">
+
+
+    <script src="/generator.js"></script>
+    <script>
+        const rawData = JSON.parse('{"id":1,"title":"ESZUT","teaser":"ESZUT, czyli Elektroniczny System Zgłaszania Usterek Technicznych. Projekt obejmuje system, który umożliwia zgłaszanie usterek i zarządzanie nimi.","content":[{"name":"heading 1","text":["Nagłówek 1 stopnia artykułu"]},{"name":"paragraph","text":["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis massa justo, efficitur eget tempus nec, aliquam in ex. Phasellus sollicitudin leo interdum, congue augue convallis, suscipit nulla. Vivamus tristique finibus mi. Donec sapien orci, tincidunt vel fermentum non, maximus quis tortor. Phasellus in lacus augue. Sed bibendum cursus ante a dapibus. Praesent turpis elit, consectetur sit amet erat a, malesuada fringilla quam. Fusce volutpat, metus vel iaculis laoreet, ante tortor efficitur ex, eu tempor lectus augue ac tortor. Fusce laoreet diam vitae massa aliquet euismod. Duis vulputate porttitor tellus ullamcorper mollis. Phasellus iaculis est ac diam dignissim vestibulum. Nunc sed quam a ex ullamcorper egestas a volutpat libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;",{"name":"link","href":"https://github.com/JakubOlejnik2007","text":"Github Autora Tekstu"},"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis massa justo, efficitur eget tempus nec, aliquam in ex. Phasellus sollicitudin leo interdum, congue augue convallis, suscipit nulla. Vivamus tristique finibus mi. Donec sapien orci, tincidunt vel fermentum non, maximus quis tortor. Phasellus in lacus augue. Sed bibendum cursus ante a dapibus. Praesent turpis elit, consectetur sit amet erat a, malesuada fringilla quam. Fusce volutpat, metus vel iaculis laoreet, ante tortor efficitur ex, eu tempor lectus augue ac tortor. Fusce laoreet diam vitae massa aliquet euismod. Duis vulputate porttitor tellus ullamcorper mollis. Phasellus iaculis est ac diam dignissim vestibulum. Nunc sed quam a ex ullamcorper egestas a volutpat libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;"]},{"name":"image","src":"https://via.placeholder.com/200x200","alt":"Placeholder Image","label":"testowy obrazen"}],"icon":"https://raw.githubusercontent.com/JakubOlejnik2007/eszut-client/main/public/logo512.png","date":1724341594589,"urlTitle":"eszut"}');
+        const insertCode = async () => {
+            console.log(rawData.content)
+            const generatedHTML = generateHTML(rawData.content);
+            document.querySelector('body').appendChild(generatedHTML);
+        }
+        insertCode();
+
+    </script>
+    <div>
+        <h1>Nagłówek 1 stopnia artykułu</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis massa justo, efficitur eget tempus nec, aliquam
+            in ex. Phasellus sollicitudin leo interdum, congue augue convallis, suscipit nulla. Vivamus tristique
+            finibus mi. Donec sapien orci, tincidunt vel fermentum non, maximus quis tortor. Phasellus in lacus augue.
+            Sed bibendum cursus ante a dapibus. Praesent turpis elit, consectetur sit amet erat a, malesuada fringilla
+            quam. Fusce volutpat, metus vel iaculis laoreet, ante tortor efficitur ex, eu tempor lectus augue ac tortor.
+            Fusce laoreet diam vitae massa aliquet euismod. Duis vulputate porttitor tellus ullamcorper mollis.
+            Phasellus iaculis est ac diam dignissim vestibulum. Nunc sed quam a ex ullamcorper egestas a volutpat
+            libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;<a
+                href="https://github.com/JakubOlejnik2007">Github Autora Tekstu</a>Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Duis massa justo, efficitur eget tempus nec, aliquam in ex. Phasellus
+            sollicitudin leo interdum, congue augue convallis, suscipit nulla. Vivamus tristique finibus mi. Donec
+            sapien orci, tincidunt vel fermentum non, maximus quis tortor. Phasellus in lacus augue. Sed bibendum cursus
+            ante a dapibus. Praesent turpis elit, consectetur sit amet erat a, malesuada fringilla quam. Fusce volutpat,
+            metus vel iaculis laoreet, ante tortor efficitur ex, eu tempor lectus augue ac tortor. Fusce laoreet diam
+            vitae massa aliquet euismod. Duis vulputate porttitor tellus ullamcorper mollis. Phasellus iaculis est ac
+            diam dignissim vestibulum. Nunc sed quam a ex ullamcorper egestas a volutpat libero. Vestibulum ante ipsum
+            primis in faucibus orci luctus et ultrices posuere cubilia curae;</p>
+    </div>
+
 
 </body>
-<script src="/generator.js"></script>
-<script>
-    const insertCode = async () => {
-        const rawData = await projectData;
-        console.log(rawData.content)
-        const generatedHTML = generateHTML(JSON.parse(rawData.content));
-        document.querySelector('body').appendChild(generatedHTML);
-    }
-    insertCode();
-
-</script>
 
 </html>
