@@ -62,6 +62,7 @@ app.get("/projekty/:projectTitle/", async (req, res) => {
         <meta name="description" content="${project.teaser}">
         <title>${project.title}</title>
         <link rel="stylesheet" href="/main.css">
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     
         <meta property="og:title" content="${project.title}">
         <meta property="og:description" content="${project.teaser}">
@@ -144,6 +145,19 @@ app.get("/api/getProjectsCount", (req, res) => {
             return;
         }
         res.send(row[0]);
+    });
+    db.close();
+
+})
+
+app.get("/api/getAllProjects", (req, res) => {
+    const db = new sqlite3.Database('homepagedata.db');
+    db.all("SELECT * FROM Projects;", (err: any, rows: any) => {
+        if (err) {
+            res.status(500).send({ error: err.message });
+            return;
+        }
+        res.send(rows);
     });
     db.close();
 
