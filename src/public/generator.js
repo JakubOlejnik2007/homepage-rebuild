@@ -1,4 +1,4 @@
-const generateHTML = (jsonArrayInput) => {
+const generateHTML = (jsonArrayInput, date) => {
     const parent = document.createElement('div');
     parent.classList.add(
         "mt-4", "w-full", "lg:w-[70%]", "md:w-[80%]",
@@ -15,7 +15,7 @@ const generateHTML = (jsonArrayInput) => {
 
         parent.appendChild(element);
     });
-
+    parent.appendChild(addFooter(date));
     console.log(parent);
     return parent;
 }
@@ -86,4 +86,16 @@ const generateImage = (object) => {
     imageLabel.textContent = object.label;
     imageParent.appendChild(imageLabel);
     return imageParent;
+}
+
+const addFooter = (date) => {
+    const footer = document.createElement("footer");
+    const objDate = new Date(date);
+    footer.textContent = `~ Jakub Olejnik, ${objDate.toLocaleDateString("pl")}`
+
+    footer.classList.add(
+        "text-text_on_gray", "text-right"
+    )
+
+    return footer;
 }

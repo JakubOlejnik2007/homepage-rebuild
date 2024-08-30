@@ -121,7 +121,7 @@ app.get("/projekty/:projectTitle/", async (req, res) => {
 const rawData = JSON.parse('${JSON.stringify(project)}');
     const insertCode = async () => {
         console.log(rawData.content)
-        const generatedHTML = generateHTML(rawData.content);
+        const generatedHTML = generateHTML(rawData.content, rawData.date);
         document.querySelector('main').appendChild(generatedHTML);
     }
     insertCode();
