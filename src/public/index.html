@@ -23,9 +23,9 @@
 
     <link rel="alternate" type="application/rss+xml" title="Tytuł Twojego Kanału" href="https://tenco.waw.pl/rss.xml" />
 
-    <link rel="stylesheet" type="text/css" href="https://gitcdn.xyz/repo/pi0/clippyjs/master/assets/clippy.css">
+    <link rel="stylesheet" type="text/css" href="clippy.css">
 
-    
+
 
 </head>
 
@@ -96,7 +96,8 @@
                     Moja twórczość
                 </h2>
             </div>
-            <div class="flex flex-col lg:flex-col-reverse gap-10 justify-center items-center m-16 mt-0 pt-16">
+            <div
+                class="flex flex-col lg:flex-col-reverse gap-10 justify-between items-center m-16 mt-0 pt-16 min-h-[700px]">
                 <div id="projectspages-js" class="flex gap-2">
 
                 </div>
@@ -135,5 +136,25 @@
         </footer>
     </main>
 </body>
+<script src="jquery.1.7.min.js"></script>
+
+<!-- Clippy.js -->
+<script src="clippy.min.js"></script>
+
+<!-- Init script -->
+<script type="text/javascript">
+    clippy.load('Clippy', async (agent) => {
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        const animations = agent.animations();
+
+
+        agent.show();
+        agent.play("Greeting");
+        agent.speak("Ta strona wspiera kanał RSS.\nLink: https://tenco.waw.pl/rss.xml")
+    });
+</script>
+
+
 
 </html>
