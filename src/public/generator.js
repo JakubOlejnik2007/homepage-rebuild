@@ -27,7 +27,7 @@ const generateParagraph = (object) => {
     )
     object.text.forEach(text => {
         if (typeof text === "string") {
-            const textNode = document.createTextNode(text);
+            const textNode = document.createTextNode(`${text} `);
             paragraph.appendChild(textNode);
         } else {
             paragraph.appendChild(generateLink(text))
@@ -39,8 +39,9 @@ const generateParagraph = (object) => {
 const generateHeading = (object) => {
     const level = object.name.split(" ")[1]
     const heading = document.createElement(`h${level}`);
+    console.log(level)
     heading.classList.add(
-        "text-my_white", `text-${level === 3 ? "" : 4 - level}xl`,
+        "text-my_white", `text-${level === "3" ? "" : 4 - level}xl`,
         "font-bold", "p-5", "my-5", "border-b-2", "border-my_white"
     )
     object.text.forEach(text => {

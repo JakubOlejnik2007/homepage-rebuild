@@ -16,10 +16,13 @@ body {
     font-family: SFProRegular;
 }
 
-a::before {
+a::after {
     content: " ";
 }
 
-a::after {
-    content: " ";
+.text-2xl {
+    font-size: 1.5rem;
+    /* 24px */
+    line-height: 2rem;
+    /* 32px */
 }
