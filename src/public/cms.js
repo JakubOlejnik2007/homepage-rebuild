@@ -2,7 +2,14 @@ const projectEntriesDiv = document.querySelector('#project-entries');
 const generatorResults = document.querySelector('#generator-results');
 const controlsDiv = document.querySelector('#controls');
 const refresh = document.querySelector('#refresh');
+const submitChanges = document.querySelector('#submit-changes');
 const docTree = document.querySelector('#doc-tree');
+
+const titleEntryInput = document.querySelector('#title');
+const teaserEntryInput = document.querySelector('#teaser');
+const iconEntryInput = document.querySelector('#icon');
+const dateEntryInput = document.querySelector('#date');
+const urlTitleEntryInput = document.querySelector('#urlTitle');
 
 console.log('Generating')
 
@@ -10,7 +17,22 @@ refresh.addEventListener("click", (e) => {
     e.preventDefault();
     getNewWorkflow();
     updateCMS();
+})
 
+submitChanges.addEventListener("click", async (e) => {
+    console.log('Submit')
+    e.preventDefault();
+    getNewWorkflow();
+    currentProject.content = currentWorkflow
+    console.log(currentProject)
+
+    const response = await fetch("http://localhost:5000/api/updateProject", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(currentProject)
+    })
 })
 
 
@@ -67,6 +89,8 @@ const generateControls = () => {
         controlsDiv.appendChild(control);
 
         control.addEventListener("click", () => {
+
+            getNewWorkflow();
             if (operand === "heading 1" || operand === "heading 2" || operand === "heading 3" || operand === "paragraph") {
                 currentWorkflow.push({ name: operand, text: [] });
             }
@@ -84,13 +108,42 @@ const generateControls = () => {
 const displayAllProjects = async () => {
     const data = await allProjects;
     const list = document.createElement("ul");
-    data.forEach(element => {
+
+    [...data, { id: -1, urlTitle: "New Project" }].forEach(element => {
+        console.log(element);
         const node = document.createElement("li");
         node.textContent = `${element.id}. ${element.urlTitle}`;
         node.addEventListener("click", () => {
             currentProject = element;
-            currentWorkflow = JSON.parse(currentProject.content);
-            updateCMS();
+            currentWorkflow = []
+            if (element.id >= 0) currentWorkflow = JSON.parse(currentProject.content);
+            else {
+                console.log(Date.now())
+                currentProject = {
+                    id: -1,
+                    title: "",
+                    teaser: "",
+                    content: [],
+                    icon: "",
+                    date: Date.now(),
+                    urlTitle: ""
+                }
+                console.log(currentProject)
+            }
+
+
+            titleEntryInput.value = currentProject.title;
+            teaserEntryInput.value = currentProject.teaser;
+            iconEntryInput.value = currentProject.icon;
+
+            const date = new Date(currentProject.date).toISOString().split("T")[0];
+
+            dateEntryInput.value = date;
+            urlTitleEntryInput.value = currentProject.urlTitle;
+
+            updateView();
+            generateControls();
+            generateWorkTree();
         })
         list.appendChild(node);
 
@@ -98,19 +151,22 @@ const displayAllProjects = async () => {
     projectEntriesDiv.appendChild(list);
 }
 
-const updateCMS = async () => {
+const updateCMS = () => {
+    console.log("Update CMS")
     getNewWorkflow();
+    console.log(currentProject)
     updateView();
     generateControls();
     generateWorkTree();
 }
 
-const updateView = async () => {
+const updateView = () => {
     generatorResults.innerHTML = "";
     generatorResults.appendChild(generateHTML(currentWorkflow, currentProject.date));
 }
 
 const generateWorkTree = () => {
+    console.log("Generating work tree...");
     docTree.innerHTML = "";
     currentWorkflow.forEach(node => {
         let controlElement;
@@ -136,8 +192,20 @@ const generateWorkTree = () => {
         controlElement.addEventListener('drop', handleDrop);
         controlElement.addEventListener('dragend', handleDragEnd);
 
+
+
         docTree.appendChild(controlElement);
     });
+    console.log(currentProject)
+
+    titleEntryInput.value = currentProject.title;
+    teaserEntryInput.value = currentProject.teaser;
+    iconEntryInput.value = currentProject.icon;
+
+    const date = new Date(currentProject.date).toISOString().split("T")[0];
+
+    dateEntryInput.value = date;
+    urlTitleEntryInput.value = currentProject.urlTitle;
 };
 
 /*
@@ -312,8 +380,16 @@ const linkControl = ({ name, href, text }) => {
 }
 
 const getNewWorkflow = () => {
+    console.log("getNewWorkflow")
     const newWorkflow = [];
 
+    currentProject.title = titleEntryInput.value;
+    currentProject.teaser = teaserEntryInput.value;
+    currentProject.icon = iconEntryInput.value;
+    const date = new Date(dateEntryInput.value);
+    currentProject.date = date.getTime()
+    currentProject.urlTitle = urlTitleEntryInput.value;
+    console.log(currentProject)
     console.log(docTree.children.toArray)
     Array.from(docTree.children).forEach((docTreeChild, docTreeChildIndex) => {
         console.log(docTreeChildIndex, docTreeChild)
@@ -369,6 +445,10 @@ const getNewWorkflow = () => {
 
         console.log(newWorkflow)
         currentWorkflow = newWorkflow;
+
+
+
+
     })
 }
 

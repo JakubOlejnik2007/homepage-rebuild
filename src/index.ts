@@ -3,6 +3,17 @@ import config from "./config";
 import cors from "cors";
 import path from "path";
 
+interface Project {
+    id: number;
+    title: string;
+    teaser: string;
+    content: any[];
+    icon: string;
+    date: number;
+    urlTitle: string;
+}
+
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -163,9 +174,47 @@ app.get("/api/getAllProjects", (req, res) => {
 
 })
 
+app.post("/api/updateProject", async (req, res) => {
+    console.log(req.body);
+    const result = await updateProject(req.body as Project);
+    result === 0 ? res.sendStatus(200) : res.sendStatus(404)
+})
+
 app.listen(config.port, () =>
     console.log(`[⚡] Server is listening on port: ${config.port}!`)
 )
+
+const updateProject = async ({ id, title, teaser, content, icon, date, urlTitle }: Project) => {
+    const db = new sqlite3.Database('homepagedata.db');
+    if (id >= 0) {
+        const sql = `
+            UPDATE Projects SET title="${title}", teaser="${teaser}", content='${JSON.stringify(content)}', icon="${icon}", date=${date}, urlTitle="${urlTitle}" WHERE id=${id};
+        `
+        console.log(sql);
+
+        try {
+            db.run(sql);
+            db.close();
+            return 0;
+        } catch (err) {
+            console.log(err);
+            return -1;
+        }
+    }
+    if (id === -1) {
+        const sql = `
+            INSERT INTO Projects VALUES (NULL, "${title}", "${teaser}", '${JSON.stringify(content)}', "${icon}", ${date}, "${urlTitle}");
+        `
+        console.log(sql);
+
+        db.run(sql);
+        db.close();
+        return 0;
+
+    }
+
+    return -1;
+}
 
 const getProject = async (title: string) => {
     const db = new sqlite3.Database('homepagedata.db');
