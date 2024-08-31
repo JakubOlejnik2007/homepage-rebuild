@@ -2,6 +2,7 @@ import express from "express";
 import config from "./config";
 import cors from "cors";
 import path from "path";
+import addItemToRss from "./addRSS";
 
 interface Project {
     id: number;
@@ -206,6 +207,13 @@ const updateProject = async ({ id, title, teaser, content, icon, date, urlTitle 
             INSERT INTO Projects VALUES (NULL, "${title}", "${teaser}", '${JSON.stringify(content)}', "${icon}", ${date}, "${urlTitle}");
         `
         console.log(sql);
+
+        await addItemToRss({
+            title: title,
+            description: teaser,
+            pubDate: new Date(date).toUTCString(),
+            link: `https://tenco.waw.pl/projekty/${urlTitle}`
+        });
 
         db.run(sql);
         db.close();
