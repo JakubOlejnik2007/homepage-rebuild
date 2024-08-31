@@ -50,8 +50,32 @@
             <article id="project-entries"></article>
             <article id="blog-entries"></article>
         </section>
-        <section id="controls" class="flex justify-center gap-3 m-5"></section>
-        <section id="generator-results"></section>
+        <div class="grid grid-cols-[1fr_3fr] mt-20">
+            <div>
+                <p class="text-text_on_gray">Edytor</p>
+                <div class="flex justify-evenly">
+                    <button id="refresh"
+                        class="bg-my_white text-my_black border-2 border-my_black hover:scale-110 duration-300 p-3 my-2">
+                        Odśwież widok
+                    </button>
+
+                    <button id="submit-changes"
+                        class="bg-my_white text-my_black border-2 border-my_black hover:scale-110 duration-300 p-3 my-2">
+                        Zapisz zmiany
+                    </button>
+
+                </div>
+                <section id="controls" class="flex justify-center gap-3 m-5 flex-wrap"></section>
+                <section id="doc-tree">
+                    
+                </section>
+            </div>
+            <div>
+                <p class="text-text_on_gray">Podgląd</p>
+                <section id="generator-results"></section>
+            </div>
+
+        </div>
     </main>
     <footer class="relative border-b-2 border-border">
         <p class="text-center text-my_orange m-5">

@@ -69,7 +69,7 @@ const generateLink = (object) => {
 const generateImage = (object) => {
     const imageParent = document.createElement('div');
     imageParent.classList.add(
-        "mx-auto", "w-[60%]"
+        "mx-auto", "w-full", "md:w-[75%]", "lg:w-[50%]", "p-8"
     )
     const image = document.createElement('img');
     image.classList.add(
