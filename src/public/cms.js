@@ -4,12 +4,50 @@ const controlsDiv = document.querySelector('#controls');
 const refresh = document.querySelector('#refresh');
 const docTree = document.querySelector('#doc-tree');
 
+console.log('Generating')
+
 refresh.addEventListener("click", (e) => {
     e.preventDefault();
     getNewWorkflow();
     updateCMS();
 
 })
+
+
+
+
+let draggedElement = null;
+
+const handleDragStart = (e) => {
+    draggedElement = e.target;
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/html", e.target.outerHTML);
+    setTimeout(() => { e.target.style.display = "none"; }, 0);
+};
+
+const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+};
+
+const handleDrop = (e) => {
+    e.preventDefault();
+    if (draggedElement !== e.target) {
+        draggedElement.style.display = "block";
+        docTree.insertBefore(draggedElement, e.target.nextSibling || e.target);
+        getNewWorkflow();
+    }
+};
+
+const handleDragEnd = (e) => {
+    draggedElement.style.display = "block";
+    draggedElement = null;
+};
+
+
+
+
+
 
 let currentProject;
 let currentWorkflow = [];
@@ -74,26 +112,33 @@ const updateView = async () => {
 
 const generateWorkTree = () => {
     docTree.innerHTML = "";
-    console.log(docTree)
     currentWorkflow.forEach(node => {
+        let controlElement;
         switch (node.name) {
             case "heading 1":
             case "heading 2":
             case "heading 3":
-                docTree.appendChild(headingControl(node));
+                controlElement = headingControl(node);
                 break;
             case "paragraph":
-                docTree.appendChild(paragraphControl(node));
+                controlElement = paragraphControl(node);
                 break;
             case "image":
-                docTree.appendChild(imageControl(node));
+                controlElement = imageControl(node);
                 break;
             case "link":
-                docTree.appendChild(linkControl(node));
+                controlElement = linkControl(node);
                 break;
         }
-    })
-}
+
+        controlElement.addEventListener('dragstart', handleDragStart);
+        controlElement.addEventListener('dragover', handleDragOver);
+        controlElement.addEventListener('drop', handleDrop);
+        controlElement.addEventListener('dragend', handleDragEnd);
+
+        docTree.appendChild(controlElement);
+    });
+};
 
 /*
 <div class="p-3 border-my_orange border-2">
@@ -114,6 +159,8 @@ const createControlContainer = (name) => {
     const controlName = document.createElement('p');
     controlName.textContent = name;
     controlName.classList.add("text-center");
+
+    parent.setAttribute('draggable', "true");
     parent.appendChild(controlName);
 
     const close = document.createElement('span');
